@@ -1,4 +1,4 @@
-from thirdweb import thirdwebSdk, SdkOptions, MintArg
+from thirdweb import ThirdwebSdk, SdkOptions, MintArg
 from fastapi import FastAPI, File, UploadFile, Response
 from pydantic import BaseModel
 import base64
@@ -11,11 +11,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
-from firebase_admin import credentials, initialize_app, storage
+# from firebase_admin import credentials, initialize_app, storage
 
 # Init firebase with your credentials
-cred = credentials.Certificate("creds.json")
-initialize_app(cred, {'storageBucket': 'your bucket URL'})
+# cred = credentials.Certificate("creds.json")
+# initialize_app(cred, {'storageBucket': 'your bucket URL'})
 
 app = FastAPI()
 
@@ -75,7 +75,7 @@ def mint(item: Item):
     blob.make_public()
     print("your file url", blob.public_url)
 
-    sdk = thirdwebSdk(SdkOptions(), "https://polygon-rpc.com")
+    sdk = ThirdwebSdk(SdkOptions(), "https://polygon-rpc.com")
 
     sdk.set_private_key("your private key")
 
